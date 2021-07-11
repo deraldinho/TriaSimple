@@ -1,0 +1,3 @@
+C:/Users/deraldinho/Desktop/Faculdade/Algoritimos 2/TriaSimple/cmake-build-debug/CMakeFiles/TriaSimple.dir
+C:/Users/deraldinho/Desktop/Faculdade/Algoritimos 2/TriaSimple/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/deraldinho/Desktop/Faculdade/Algoritimos 2/TriaSimple/cmake-build-debug/CMakeFiles/rebuild_cache.dir
