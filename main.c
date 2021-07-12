@@ -1,5 +1,7 @@
 //
-// Created by deraldinho on 11/07/2021.
+// Created by Deraldo Palomino Filho on 06/07/2021.
+// course: BACHARELADO EM ENGENHARIA DE SOFTWARE
+// Matricula: 21111385-5
 //
 
 #include <stdio.h>
@@ -28,15 +30,128 @@ typedef struct paciente{
     Sintomas sint;
 }Paciente;
 
-void inicio();
+int verificar_sintoma(char aux);
 
-int main() {
-    setlocale(LC_ALL, "Portuguese");
-    inicio();
-    printf("\n");
-    return 0;
+
+int main(int argc, char *argv[])
+{
+  setlocale(LC_ALL, "Portuguese");
+  FILE * arquivo;
+  char nome_arquivo[19];
+  Paciente paci;
+  int menu = -1;
+  while(menu != 0){
+             printf("Digite seu CPF: \n");
+             gets(paci.cpf);
+             if (strcmp(paci.cpf,'0000' == 0))
+                exit;
+             printf("Digite seu NOME: \n");
+             gets(paci.nome);
+             printf("Digite seu sexo (M)Masculino (F)Feminino\n");
+             scanf("%c",&paci.sexo);
+             printf("Digite sua idade: \n");
+             scanf("%d",&paci.idade);
+             char aux;
+             printf("Esta com febre? (S)sim  (N)Não\n");
+             fflush(stdin);
+             scanf("%c",&aux);
+             paci.sint.febre = verificar_sintoma(aux);
+             printf("Esta com dor de cabeça? (S)sim  (N)Não\n");
+             fflush(stdin);
+             scanf("%c",&aux);
+             paci.sint.dor_cabeca = verificar_sintoma(aux);
+             printf("Esta com nariz escorrendo? (S)sim  (N)Não\n");
+             fflush(stdin);
+             scanf("%c",&aux);
+             paci.sint.secr_nasal = verificar_sintoma(aux);
+             printf("Esta com dor na garganta? (S)sim  (N)Não\n");
+             fflush(stdin);
+             scanf("%c",&aux);
+             paci.sint.dor_garganta = verificar_sintoma(aux);
+             printf("Esta com tosse Seca (S)sim  (N)Não\n");
+             fflush(stdin);
+             scanf("%c",&aux);
+             paci.sint.tosse_seca = verificar_sintoma(aux);
+             printf("Esta com dificuldade ao respitrar? (S)sim  (N)Não\n");
+             fflush(stdin);
+             scanf("%c",&aux);
+             paci.sint.dific_respiratoria = verificar_sintoma(aux);
+             printf("Esta com dor no corpo? (S)sim  (N)Não\n");
+             fflush(stdin);
+             scanf("%c",&aux);
+             paci.sint.dor_corpo = verificar_sintoma(aux);
+             printf("Esta com Diarreia? (S)sim  (N)Não\n");
+             fflush(stdin);
+             scanf("%c",&aux);
+             paci.sint.diarreia = verificar_sintoma(aux);
+             printf("Esta com alguem que contraiu COVID-19 (S)sim  (N)Não\n");
+             fflush(stdin);
+             scanf("%c",&aux);
+             paci.sint.contato_pessoa_covid = verificar_sintoma(aux);
+             printf("Esta aglomerou ultimamente? (S)sim  (N)Não\n");
+             fflush(stdin);
+             scanf("%c",&aux);
+             paci.sint.loc_aglomeracao = verificar_sintoma(aux);
+             paci.sint.nota_avaliacao = 0;
+             if (paci.sint.febre == 1)
+                paci.sint.nota_avaliacao = paci.sint.nota_avaliacao+5;
+             if(paci.sint.dor_cabeca == 1 )
+                paci.sint.nota_avaliacao = paci.sint.nota_avaliacao+1;
+             if(paci.sint.secr_nasal == 1)
+                paci.sint.nota_avaliacao = paci.sint.nota_avaliacao+1;
+             if(paci.sint.dor_garganta == 1)
+                paci.sint.nota_avaliacao = paci.sint.nota_avaliacao+1;
+             if(paci.sint.dific_respiratoria == 1)
+                paci.sint.nota_avaliacao = paci.sint.nota_avaliacao+10;
+             if(paci.sint.dor_corpo == 1)
+               paci.sint.nota_avaliacao = paci.sint.nota_avaliacao+1;
+             if(paci.sint.diarreia == 1)
+               paci.sint.nota_avaliacao = paci.sint.nota_avaliacao+1;
+             if(paci.sint.contato_pessoa_covid == 1)
+               paci.sint.nota_avaliacao = paci.sint.nota_avaliacao+10;
+             if(paci.sint.loc_aglomeracao == 1)
+               paci.sint.nota_avaliacao = paci.sint.nota_avaliacao+3;
+             
+             strcpy(nome_arquivo, paci.cpf);
+             strcat(nome_arquivo,".txt");
+             arquivo = fopen(nome_arquivo,"a");
+             if(arquivo == NULL){
+                        printf("deu não man");
+             }else{
+                    fprintf(arquivo,"CPF: %s\n",paci.cpf);
+                    fprintf(arquivo,"NOME: %s\n",paci.nome);
+                    fprintf(arquivo,"SEXO: %c\n",paci.sexo);
+                    fprintf(arquivo,"IDADE: %d\n",paci.idade);
+                    fprintf(arquivo,"%d\n",paci.sint.nota_avaliacao);
+             }
+             fclose(arquivo);
+             
+             menu = 0;
+  }
+  printf("%s\n",nome_arquivo);
+  printf("%s\n",paci.cpf);
+  printf("%s\n",paci.nome);
+  printf("%c\n",paci.sexo);
+  printf("%d\n",paci.idade);
+  printf("%d\n",paci.sint.febre);
+  printf("%d\n",paci.sint.dor_cabeca);
+  printf("%d\n",paci.sint.secr_nasal);
+  printf("%d\n",paci.sint.dor_garganta);
+  printf("%d\n",paci.sint.tosse_seca);
+  printf("%d\n",paci.sint.dific_respiratoria);
+  printf("%d\n",paci.sint.dor_corpo);
+  printf("%d\n",paci.sint.diarreia);
+  printf("%d\n",paci.sint.contato_pessoa_covid);
+  printf("%d\n",paci.sint.loc_aglomeracao);
+  printf("%d\n",paci.sint.nota_avaliacao);
+  
+  system("PAUSE");
+  return 0;
 }
 
-void inicio(){
-
+int verificar_sintoma(char aux){
+    if(aux == 's' || aux == 'S')
+           return 1;
+    if(aux == 'n' || aux == 'N')
+           return 0;
 }
