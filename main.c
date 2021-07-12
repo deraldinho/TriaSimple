@@ -43,14 +43,13 @@ int main(int argc, char *argv[])
   while(menu != 0){
              printf("Digite seu CPF: \n");
              gets(paci.cpf);
-             if (strcmp(paci.cpf,'0000' == 0))
-                exit;
              printf("Digite seu NOME: \n");
              gets(paci.nome);
              printf("Digite seu sexo (M)Masculino (F)Feminino\n");
              scanf("%c",&paci.sexo);
              printf("Digite sua idade: \n");
              scanf("%d",&paci.idade);
+             system("cls");
              char aux;
              printf("Esta com febre? (S)sim  (N)Não\n");
              fflush(stdin);
@@ -123,27 +122,41 @@ int main(int argc, char *argv[])
                     fprintf(arquivo,"SEXO: %c\n",paci.sexo);
                     fprintf(arquivo,"IDADE: %d\n",paci.idade);
                     fprintf(arquivo,"%d\n",paci.sint.nota_avaliacao);
+                    //print
+                    printf("%s\n",nome_arquivo);
+					printf("%s\n",paci.cpf);
+					printf("%s\n",paci.nome);
+					printf("%c\n",paci.sexo);
+					printf("%d\n",paci.idade);
+					printf("%d\n",paci.sint.febre);
+					printf("%d\n",paci.sint.dor_cabeca);
+					printf("%d\n",paci.sint.secr_nasal);
+					printf("%d\n",paci.sint.dor_garganta);
+					printf("%d\n",paci.sint.tosse_seca);
+					printf("%d\n",paci.sint.dific_respiratoria);
+					printf("%d\n",paci.sint.dor_corpo);
+					printf("%d\n",paci.sint.diarreia);
+					printf("%d\n",paci.sint.contato_pessoa_covid);
+					printf("%d\n",paci.sint.loc_aglomeracao);
+					printf("%d\n",paci.sint.nota_avaliacao);
+					if(paci.sint.nota_avaliacao > -1 && paci.sint.nota_avaliacao <= 9){
+						fprintf(arquivo,"Por favor ir para Baixo Risco");
+						printf("Risco Baixo\n");
+					}
+					else if(paci.sint.nota_avaliacao > 10 && paci.sint.nota_avaliacao <= 19){
+						fprintf(arquivo,"Por favor ir para Médio Risco");
+						printf("Risco Médio!\n");
+					}else if(paci.sint.nota_avaliacao > 20){
+						fprintf(arquivo,"Por favor ir para Grande Risco");
+						printf("Risco Alto!\n");
+					}
              }
              fclose(arquivo);
-             
+             printf("Deseja continuar? (0)Não, (1)Sim");
+             scanf("%d",&menu);
              menu = 0;
   }
-  printf("%s\n",nome_arquivo);
-  printf("%s\n",paci.cpf);
-  printf("%s\n",paci.nome);
-  printf("%c\n",paci.sexo);
-  printf("%d\n",paci.idade);
-  printf("%d\n",paci.sint.febre);
-  printf("%d\n",paci.sint.dor_cabeca);
-  printf("%d\n",paci.sint.secr_nasal);
-  printf("%d\n",paci.sint.dor_garganta);
-  printf("%d\n",paci.sint.tosse_seca);
-  printf("%d\n",paci.sint.dific_respiratoria);
-  printf("%d\n",paci.sint.dor_corpo);
-  printf("%d\n",paci.sint.diarreia);
-  printf("%d\n",paci.sint.contato_pessoa_covid);
-  printf("%d\n",paci.sint.loc_aglomeracao);
-  printf("%d\n",paci.sint.nota_avaliacao);
+
   
   system("PAUSE");
   return 0;
